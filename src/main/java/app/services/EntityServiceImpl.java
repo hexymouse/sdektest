@@ -1,7 +1,10 @@
 package app.services;
 
 import app.dto.EntityDto;
+import app.entities.Entity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EntityServiceImpl implements EntityService {
@@ -10,7 +13,7 @@ public class EntityServiceImpl implements EntityService {
 
     }
 
-    public String getAllEntities() {
-        return "list of entities";
+    public List<Entity> getAllEntities() {
+        return null;
     }
 }
