@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/application?useSSL=false
+    username: root
+    password: root
+    riverClassName: com.mysql.jdbc.Driver
