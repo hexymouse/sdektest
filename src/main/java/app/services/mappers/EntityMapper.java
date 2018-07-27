@@ -1,4 +1,4 @@
-package app.mappers;
+package app.services.mappers;
 
 import app.dto.EntityDto;
 import app.entities.Entity;
@@ -6,9 +6,9 @@ import app.entities.Entity;
 import java.util.List;
 
 public interface EntityMapper {
-    Entity mapToEntity(EntityDto entityDto);
+    Entity map(EntityDto entityDto);
 
-    EntityDto mapToEntityDto(Entity entity);
+    EntityDto map(Entity entity);
 
     List<EntityDto> mapAllToEntityDto(List<Entity> entities);
 }

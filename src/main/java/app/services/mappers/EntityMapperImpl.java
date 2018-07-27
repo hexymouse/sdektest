@@ -1,4 +1,4 @@
-package app.mappers;
+package app.services.mappers;
 
 import app.dto.EntityDto;
 import app.entities.Entity;
@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class EntityMapperImpl implements EntityMapper {
 
-    public Entity mapToEntity(EntityDto entityDto) {
+    public Entity map(EntityDto entityDto) {
         Entity entity = new Entity();
         entity.setId(entityDto.getId());
         entity.setName(entityDto.getName());
@@ -18,7 +19,7 @@ public class EntityMapperImpl implements EntityMapper {
         return entity;
     }
 
-    public EntityDto mapToEntityDto(Entity entity) {
+    public EntityDto map(Entity entity) {
         EntityDto dto = new EntityDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -27,6 +28,6 @@ public class EntityMapperImpl implements EntityMapper {
     }
 
     public List<EntityDto> mapAllToEntityDto(List<Entity> entities) {
-        return null;
+        return entities.stream().map(this::map).collect(Collectors.toList());
     }
 }

@@ -1,7 +1,10 @@
 package app.entities;
 
+import javax.persistence.Id;
+
 public class Entity {
 
+    @Id
     private Long id;
     private String name;
 
@@ -21,5 +24,10 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name;
     }
 }
