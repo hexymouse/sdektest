@@ -4,9 +4,13 @@ import app.entities.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.util.Collection;
+import java.util.Objects;
 
 @Repository
 public class EntityRepository {
@@ -21,12 +25,21 @@ public class EntityRepository {
     public Entity create(Entity entity) {
         final String query = "INSERT INTO entity (name) VALUES (?)";
 
-        jdbcTemplate.update(query, entity.getName());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement preparedStatement = connection.prepareStatement(query, new String[]{"id"});
+                    preparedStatement.setString(1, entity.getName());
+                    return preparedStatement;
+                },
+                keyHolder
+        );
+        entity.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
         return entity;
     }
 
-    public List<Entity> findAll() {
+    public Collection<Entity> findAll() {
         final String query = "SELECT * FROM entity";
 
         return jdbcTemplate.query(

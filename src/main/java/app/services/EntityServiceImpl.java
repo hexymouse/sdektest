@@ -26,6 +26,6 @@ public class EntityServiceImpl implements EntityService {
     }
 
     public List<EntityDto> getAll() {
-        return entityMapper.mapAllToEntityDto(entityRepository.findAll());
+        return entityMapper.mapAllToEntityDto((List<Entity>) entityRepository.findAll());
     }
 }
