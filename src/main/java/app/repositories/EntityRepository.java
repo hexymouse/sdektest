@@ -17,18 +17,19 @@ public class EntityRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    private final static String createQuery = "INSERT INTO entity (name) VALUES (?)";
+    private final static String getAllQuery = "SELECT * FROM entity";
+
     @Autowired
     public EntityRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public Entity create(Entity entity) {
-        final String query = "INSERT INTO entity (name) VALUES (?)";
-
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 connection -> {
-                    PreparedStatement preparedStatement = connection.prepareStatement(query, new String[]{"id"});
+                    PreparedStatement preparedStatement = connection.prepareStatement(createQuery, new String[]{"id"});
                     preparedStatement.setString(1, entity.getName());
                     return preparedStatement;
                 },
@@ -40,10 +41,8 @@ public class EntityRepository {
     }
 
     public Collection<Entity> findAll() {
-        final String query = "SELECT * FROM entity";
-
         return jdbcTemplate.query(
-                query,
+                getAllQuery,
                 (rs, rowNum) -> {
                     Entity entity = new Entity();
                     entity.setId(rs.getLong("id"));
