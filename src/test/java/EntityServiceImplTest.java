@@ -1,4 +1,5 @@
 import app.dto.EntityDto;
+import app.entities.Entity;
 import app.repositories.EntityRepository;
 import app.services.EntityService;
 import app.services.EntityServiceImpl;
@@ -36,13 +37,20 @@ public class EntityServiceImplTest {
 
     @Test
     public void testCreate() {
+        final EntityDto entityDto = createEntityDto();
+        final Entity entity = createEntity();
+
+        when(entityMapper.map(entityDto)).thenReturn(entity);
+        when(entityMapper.map(entity)).thenReturn(entityDto);
+        when(entityRepository.create(entity)).thenReturn(entity);
+
         EntityService entityService = new EntityServiceImpl(entityRepository, entityMapper);
-        EntityDto entityDto = new EntityDto();
-        EntityDto mockEntityDto = new EntityDto();
-        mockEntityDto.setId(2L);
-        when(entityService.create(entityDto)).thenReturn(mockEntityDto);
-        EntityDto entity = entityService.create(entityDto);
-        assertEquals(entity, mockEntityDto);
+        final EntityDto result = entityService.create(entityDto);
+
+        assertEquals(entityDto, result);
+        verify(entityMapper, times(1)).map(entityDto);
+        verify(entityRepository, times(1)).create(entity);
+        verify(entityMapper, times(1)).map(entity);
     }
 
     @Test
@@ -54,5 +62,13 @@ public class EntityServiceImplTest {
         assertEquals(1, list.size());
         EntityDto entityDto = list.get(0);
         assertEquals("test", entityDto.getName());
+    }
+
+    private EntityDto createEntityDto() {
+        return new EntityDto();
+    }
+
+    private Entity createEntity() {
+        return new Entity();
     }
 }
