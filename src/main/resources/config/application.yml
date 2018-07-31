@@ -5,3 +5,6 @@ spring:
     username: mysql
     password: root
     driverClassName: com.mysql.cj.jdbc.Driver
+
+  liquibase:
+    change-log: classpath:liquibase/db-changelog.yaml
