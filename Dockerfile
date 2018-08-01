@@ -1,6 +1,6 @@
 FROM java:8
 
-COPY ../target/. /opt/sdektest
+COPY target/. /opt/sdektest
 RUN apt update
 RUN apt install -y libaio1
 
