@@ -17,3 +17,5 @@
 `docker run -p 80:8080 sdektest`
 
 Далее можно делать запросы на 80 порт localhost.
+
+Для удобства была использована embedded mysql.

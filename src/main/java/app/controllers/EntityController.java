@@ -5,6 +5,7 @@ import app.services.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class EntityController {
     }
 
     @PostMapping
-    public EntityDto createEntity(@RequestBody EntityDto entityDto) {
+    public EntityDto createEntity(@RequestBody @Valid EntityDto entityDto) {
         return entityService.create(entityDto);
     }
 }

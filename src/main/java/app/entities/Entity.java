@@ -1,7 +1,10 @@
 package app.entities;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@javax.persistence.Entity
+@Table(name="entity")
 public class Entity {
 
     @Id
@@ -24,10 +27,5 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return id + " " + name;
     }
 }

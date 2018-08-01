@@ -1,8 +1,12 @@
 package app.dto;
 
+import javax.validation.constraints.Size;
+
 public class EntityDto {
 
     private Long id;
+
+    @Size(min = 1, max = 255)
     private String name;
 
     public EntityDto() {}
@@ -21,10 +25,5 @@ public class EntityDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return id + " " + name;
     }
 }

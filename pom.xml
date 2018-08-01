@@ -8,6 +8,23 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.4.RELEASE</version>
     </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!--Dependencies versions-->
+        <spring-boot-starter-jdbc.version>2.0.3.RELEASE</spring-boot-starter-jdbc.version>
+        <spring-boot-starter-web.version>2.0.3.RELEASE</spring-boot-starter-web.version>
+        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+        <persistence-api.version>1.0.2</persistence-api.version>
+        <liquibase-maven-plugin.version>3.6.2</liquibase-maven-plugin.version>
+        <spring-boot-maven-plugin.version>1.5.2.RELEASE</spring-boot-maven-plugin.version>
+        <mockito-all.version>1.9.5</mockito-all.version>
+        <junit.version>4.12</junit.version>
+        <wix-embedded-mysql.version>4.1.2</wix-embedded-mysql.version>
+    </properties>
     <groupId>com.sdek.test</groupId>
     <artifactId>sdek-test</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -89,44 +106,44 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>${spring-boot-starter-web.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>${spring-boot-starter-jdbc.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
+            <version>${persistence-api.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
+            <version>${mockito-all.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
-            <version>3.6.2</version>
+            <version>${liquibase-maven-plugin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.wix</groupId>
             <artifactId>wix-embedded-mysql</artifactId>
-            <version>4.1.2</version>
+            <version>${wix-embedded-mysql.version}</version>
         </dependency>
     </dependencies>
 </project>
