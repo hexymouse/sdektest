@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Table extends Component{
+class Table extends Component{
     constructor(props) {
         super(props);
-
         this.state = {
             data: []
         };
@@ -19,6 +18,12 @@ export default class Table extends Component{
     }
 
     render() {
+        let data = this.state.data;
+
+        if (this.props.last instanceof Object) {
+            data.push(this.props.last);
+        }
+
         let tableTemplate;
         
         function makeIdColumn(row) {
@@ -29,7 +34,7 @@ export default class Table extends Component{
             return <td>{row.name}</td>
         }
 
-        tableTemplate = this.state.data.map((row, i) => {
+        tableTemplate = data.map((row, i) => {
             return <tr key={i}>{makeIdColumn(row)}{makeNameColumn(row)}</tr>
         });
 
@@ -48,4 +53,6 @@ export default class Table extends Component{
         );
     }
 }
+
+export default Table;
 

@@ -4,14 +4,25 @@ import Table from './Table';
 import NameForm from "./NameForm";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Table/>
-        <NameForm/>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {lastAdded: ''};
+    }
+
+    addLast = (data) => {
+        this.setState((prevState) => {
+            return {lastAdded: data};
+        });
+    };
+
+    render() {
+        return (
+            <div className="App">
+                <Table last={this.state.lastAdded}/>
+                <NameForm addLast={this.addLast}/>
+            </div>
+        );
+    }
 }
 
 export default App;
