@@ -20,15 +20,14 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityServiceImplTest {
-    private final List<EntityDto> list = new ArrayList<>();
-    private final String filterString = "te";
+    private final List<Entity> list = new ArrayList<>();
 
     @Before
     public void setUpEntities() {
-        EntityDto entityDto = new EntityDto();
-        entityDto.setId(1L);
-        entityDto.setName("test");
-        list.add(entityDto);
+        Entity entity = new Entity();
+        entity.setId(1L);
+        entity.setName("test");
+        list.add(entity);
     }
 
     @Mock
@@ -58,25 +57,28 @@ public class EntityServiceImplTest {
     @Test
     public void testGetAll() {
         EntityService entityService = new EntityServiceImpl(entityRepository, entityMapper);
-        when(entityService.getAll()).thenReturn(list);
+
+        when(entityRepository.findAll()).thenReturn(list);
+
         List<EntityDto> list = entityService.getAll();
         assertFalse(list.isEmpty());
         assertEquals(1, list.size());
-        EntityDto entityDto = list.get(0);
-        assertEquals("test", entityDto.getName());
     }
 
     @Test
     public void testFilterByName() {
+        final EntityDto entityDto = createEntityDto();
+        final Entity entity = createEntity();
+
         final List<Entity> entities = new ArrayList<>();
 
-        when(entityMapper.mapAllToEntityDto(entities)).thenReturn(list);
+        String filterString = "te";
+        when(entityMapper.map(entity)).thenReturn(entityDto);
         when(entityRepository.filterByName(filterString)).thenReturn(entities);
 
         EntityService entityService = new EntityServiceImpl(entityRepository, entityMapper);
         final Collection<EntityDto> result = entityService.filterByName(filterString);
 
-        verify(entityMapper, times(1)).mapAllToEntityDto(entities);
         verify(entityRepository, times(1)).filterByName(filterString);
     }
 

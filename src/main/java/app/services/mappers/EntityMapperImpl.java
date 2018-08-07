@@ -26,8 +26,4 @@ public class EntityMapperImpl implements EntityMapper {
 
         return dto;
     }
-
-    public List<EntityDto> mapAllToEntityDto(List<Entity> entities) {
-        return entities.stream().map(this::map).collect(Collectors.toList());
-    }
 }

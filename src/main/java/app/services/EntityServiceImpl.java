@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EntityServiceImpl implements EntityService {
@@ -26,10 +27,10 @@ public class EntityServiceImpl implements EntityService {
     }
 
     public List<EntityDto> getAll() {
-        return entityMapper.mapAllToEntityDto((List<Entity>) entityRepository.findAll());
+        return entityRepository.findAll().stream().map(entityMapper::map).collect(Collectors.toList());
     }
 
     public List<EntityDto> filterByName(String name) {
-        return entityMapper.mapAllToEntityDto((List<Entity>) entityRepository.filterByName(name));
+        return entityRepository.filterByName(name).stream().map(entityMapper::map).collect(Collectors.toList());
     }
 }

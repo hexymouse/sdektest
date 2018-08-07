@@ -9,6 +9,4 @@ public interface EntityMapper {
     Entity map(EntityDto entityDto);
 
     EntityDto map(Entity entity);
-
-    List<EntityDto> mapAllToEntityDto(List<Entity> entities);
 }
