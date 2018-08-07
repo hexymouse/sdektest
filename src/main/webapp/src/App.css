@@ -132,6 +132,7 @@ table.namesTable tfoot .links a{
   box-sizing: content-box;
   padding: 9px 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
   border: 1px solid #b7b7b7;
   -webkit-border-radius: 3px;
   border-radius: 3px;

@@ -28,4 +28,8 @@ public class EntityServiceImpl implements EntityService {
     public List<EntityDto> getAll() {
         return entityMapper.mapAllToEntityDto((List<Entity>) entityRepository.findAll());
     }
+
+    public List<EntityDto> filterByName(String name) {
+        return entityMapper.mapAllToEntityDto((List<Entity>) entityRepository.filterByName(name));
+    }
 }

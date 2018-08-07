@@ -8,4 +8,6 @@ public interface EntityService {
     EntityDto create(EntityDto entityDto);
 
     List<EntityDto> getAll();
+
+    List<EntityDto> filterByName(String name);
 }

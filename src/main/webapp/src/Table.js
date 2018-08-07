@@ -20,6 +20,11 @@ class Table extends Component{
     render() {
         let data = this.state.data;
 
+        if (this.props.filtered instanceof Object) {
+            data = this.props.filtered;
+            this.props.last = null;
+        }
+
         if (this.props.last instanceof Object) {
             data.push(this.props.last);
         }

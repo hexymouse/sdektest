@@ -18,3 +18,13 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+        - createIndex:
+            catalogName: entity
+            columns:
+              - column:
+                  name: name
+                  type: varchar(255)
+            indexName: idx_name
+            schemaName: public
+            tableName: entity
+            unique: false

@@ -28,4 +28,10 @@ public class EntityController {
     public EntityDto createEntity(@RequestBody @Valid EntityDto entityDto) {
         return entityService.create(entityDto);
     }
+
+    @RequestMapping("/filter")
+    @GetMapping
+    public List<EntityDto> filterByName(@RequestParam("name") String name) {
+        return entityService.filterByName(name);
+    }
 }

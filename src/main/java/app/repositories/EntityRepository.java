@@ -19,6 +19,7 @@ public class EntityRepository {
 
     private final static String createQuery = "INSERT INTO entity (name) VALUES (?)";
     private final static String getAllQuery = "SELECT * FROM entity";
+    private final static String filterByNameQuery = "SELECT * FROM entity WHERE name like ?";
 
     @Autowired
     public EntityRepository(JdbcTemplate jdbcTemplate) {
@@ -43,6 +44,19 @@ public class EntityRepository {
     public Collection<Entity> findAll() {
         return jdbcTemplate.query(
                 getAllQuery,
+                (rs, rowNum) -> {
+                    Entity entity = new Entity();
+                    entity.setId(rs.getLong("id"));
+                    entity.setName(rs.getString("name"));
+                    return entity;
+                }
+        );
+    }
+
+    public Collection<Entity> filterByName(String name) {
+        return jdbcTemplate.query(
+                filterByNameQuery,
+                new String[] { name + "%" },
                 (rs, rowNum) -> {
                     Entity entity = new Entity();
                     entity.setId(rs.getLong("id"));

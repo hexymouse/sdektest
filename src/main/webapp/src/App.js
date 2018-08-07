@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Table from './Table';
 import NameForm from "./NameForm";
+import NameFilter from "./NameFilter"
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {lastAdded: ''};
+        this.state = {lastAdded: '', filter: ''};
     }
 
     addLast = (data) => {
@@ -15,10 +16,17 @@ class App extends Component {
         });
     };
 
+    filterName = (data) => {
+        this.setState((prevState) => {
+            return {filter: data};
+        });
+    };
+
     render() {
         return (
             <div className="App">
-                <Table last={this.state.lastAdded}/>
+                <NameFilter filterName={this.filterName}/>
+                <Table last={this.state.lastAdded} filtered={this.state.filter}/>
                 <NameForm addLast={this.addLast}/>
             </div>
         );

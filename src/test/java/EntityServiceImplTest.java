@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class EntityServiceImplTest {
     private final List<EntityDto> list = new ArrayList<>();
+    private final String filterString = "te";
 
     @Before
     public void setUpEntities() {
@@ -62,6 +64,20 @@ public class EntityServiceImplTest {
         assertEquals(1, list.size());
         EntityDto entityDto = list.get(0);
         assertEquals("test", entityDto.getName());
+    }
+
+    @Test
+    public void testFilterByName() {
+        final List<Entity> entities = new ArrayList<>();
+
+        when(entityMapper.mapAllToEntityDto(entities)).thenReturn(list);
+        when(entityRepository.filterByName(filterString)).thenReturn(entities);
+
+        EntityService entityService = new EntityServiceImpl(entityRepository, entityMapper);
+        final Collection<EntityDto> result = entityService.filterByName(filterString);
+
+        verify(entityMapper, times(1)).mapAllToEntityDto(entities);
+        verify(entityRepository, times(1)).filterByName(filterString);
     }
 
     private EntityDto createEntityDto() {
